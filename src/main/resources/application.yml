@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: nbc-w7-assignment
+
+---
+spring:
+  profiles:
+    active: local
