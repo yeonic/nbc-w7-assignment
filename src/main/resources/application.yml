@@ -2,6 +2,11 @@ spring:
   application:
     name: nbc-w7-assignment
 
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ---
 spring:
   profiles:
