@@ -17,16 +17,14 @@ public class AdminAuthorizationInterceptor implements HandlerInterceptor {
     String role = (String) request.getAttribute("userRole");
 
     if (UserRole.of(role) != UserRole.ADMIN) {
-      log.info("[{}] [{} {}] [userId: {}] BLOCKED.",
-              LocalDateTime.now(), request.getMethod(),
-              request.getRequestURI(), request.getAttribute("userId"));
+      log.info("[{}] [{} {}] BLOCKED.",
+              LocalDateTime.now(), request.getMethod(), request.getRequestURI());
 
       throw new InvalidAdminAccessException("관리자만 접근이 가능합니다.");
     }
 
-    log.info("[{}] [{} {}] [userId: {}]admin task requested.",
-            LocalDateTime.now(), request.getMethod(),
-            request.getRequestURI(), request.getAttribute("userId"));
+    log.info("[{}] [{} {}] PASSED.",
+            LocalDateTime.now(), request.getMethod(), request.getRequestURI());
     return true;
   }
 }
