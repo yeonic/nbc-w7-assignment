@@ -11,12 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(InvalidRequestException.class)
   public ResponseEntity<Map<String, Object>> handleInvalidRequestException(
           InvalidRequestException ex) {
@@ -26,6 +28,7 @@ public class GlobalExceptionHandler {
     return getErrorResponse(status, ex.getMessage());
   }
 
+  @ResponseStatus(HttpStatus.FORBIDDEN)
   @ExceptionHandler(InvalidAdminAccessException.class)
   public ResponseEntity<Map<String, Object>> handleInvalidAdminAccessException(
           InvalidAdminAccessException ex) {
@@ -35,6 +38,7 @@ public class GlobalExceptionHandler {
     return getErrorResponse(status, ex.getMessage());
   }
 
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValidException(
           MethodArgumentNotValidException ex) {
@@ -48,6 +52,7 @@ public class GlobalExceptionHandler {
     return getErrorResponse(status, errorMessage);
   }
 
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
   @ExceptionHandler(AuthException.class)
   public ResponseEntity<Map<String, Object>> handleAuthException(AuthException ex) {
     log.info("handleAuthException", ex);
@@ -56,6 +61,7 @@ public class GlobalExceptionHandler {
     return getErrorResponse(status, ex.getMessage());
   }
 
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler(ServerException.class)
   public ResponseEntity<Map<String, Object>> handleServerException(ServerException ex) {
     log.info("handleServerException", ex);
